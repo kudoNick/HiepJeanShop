@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -36,11 +36,16 @@ public class ShoppingFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_shopping, container, false);
         rcvShopping = root.findViewById(R.id.rcvShopping);
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        rcvShopping.setLayoutManager(layoutManager1);
+
+//        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+//        rcvShopping.setLayoutManager(layoutManager1);
+
+
+        rcvShopping.setHasFixedSize(true);
+        rcvShopping.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         shoppingList = new ArrayList<>();
-        AndroidNetworking.get("http://192.168.1.5:8080/api/products")
+        AndroidNetworking.get("http://192.168.0.128:8080/api/products")
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -63,6 +68,7 @@ public class ShoppingFragment extends Fragment {
                         Toast.makeText(getContext(), anError.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
         return root;
     }
 }
