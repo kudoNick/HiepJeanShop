@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Shopping {
-    public String name,price,image;
+    public String name,price,image,amount;
 
 
     public Shopping(JSONObject jsonObject) throws JSONException {
@@ -17,6 +17,13 @@ public class Shopping {
         if (jsonObject.has("productThumb")) {
             image = jsonObject.getString("productThumb");
         }
+        if (jsonObject.has("amount")) {
+            amount = jsonObject.getString("amount");
+        }
+    }
+
+    public String getAmount() {
+        return amount;
     }
 
     public String getName() {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,12 +32,14 @@ public class ShoppingFragment extends Fragment {
     private ShoppingAdapter shoppingAdapter;
     private List<Shopping> shoppingList;
     private Shopping shopping;
+    private ProgressBar progressBar;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_shopping, container, false);
         rcvShopping = root.findViewById(R.id.rcvShopping);
 
+        progressBar = root.findViewById(R.id.proBar);
 //        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
 //        rcvShopping.setLayoutManager(layoutManager1);
 
@@ -55,6 +58,7 @@ public class ShoppingFragment extends Fragment {
                             for (int i = 0; i < products.length(); i++) {
                                 shopping = new Shopping(products.getJSONObject(i));
                                 shoppingList.add(shopping);
+                                progressBar.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -2,6 +2,8 @@ package com.example.hiepjeanshop.Acitivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +40,7 @@ public class ChildProductActivity extends AppCompatActivity {
     Toolbar toolbar;
     private ImageView imgProduct;
     private TextView tvPrice,tvName;
+    private Button btnbuy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,13 +84,15 @@ public class ChildProductActivity extends AppCompatActivity {
         String name = intent.getStringExtra("name");
         String price = intent.getStringExtra("price");
         String image = intent.getStringExtra("image");
+        String amount = intent.getStringExtra("amount");
 
         Picasso.get().load(image).into(imgProduct);
-        tvPrice.setText(price);
+
         Locale localeVN = new Locale("", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         String str1 = currencyVN.format(Integer.parseInt((price)));
         tvPrice.setText(str1);
+
         tvName.setText(name);
 
         toolbar = findViewById(R.id.toolbar);
@@ -97,13 +102,20 @@ public class ChildProductActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        //button buy
+        btnbuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuyProductFragment buyProductFragment = new BuyProductFragment(name,image,price,amount,ChildProductActivity.this);
+                buyProductFragment.show(getSupportFragmentManager(),"Mua san pham");
+            }
+        });
     }
     private void thamChieu(){
         imgProduct = findViewById(R.id.imgProduct);
         tvPrice = findViewById(R.id.tvPrice);
         tvName = findViewById(R.id.tvName);
-
-
+        btnbuy = findViewById(R.id.btnBuy);
 
     }
 
