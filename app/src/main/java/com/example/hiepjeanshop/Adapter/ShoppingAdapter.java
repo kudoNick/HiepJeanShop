@@ -59,6 +59,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.Shoppi
                 intent.putExtra("price", shopping.getPrice());
                 intent.putExtra("image", shopping.getImage());
                 intent.putExtra("amount", shopping.getAmount());
+                intent.putExtra("id", shopping.getId());
                 context.startActivity(intent);
             }
         });

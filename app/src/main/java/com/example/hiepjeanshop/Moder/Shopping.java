@@ -4,8 +4,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Shopping {
-    public String name,price,image,amount;
+    public String name,price,image,amount,id;
 
+
+    public Shopping(String name, String price, String image) {
+        this.name = name;
+        this.price = price;
+        this.image = image;
+    }
 
     public Shopping(JSONObject jsonObject) throws JSONException {
         if (jsonObject.has("name")) {
@@ -19,7 +25,13 @@ public class Shopping {
         }
         if (jsonObject.has("amount")) {
             amount = jsonObject.getString("amount");
+        }if (jsonObject.has("_id")){
+            id = jsonObject.getString("_id");
         }
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getAmount() {

@@ -20,7 +20,7 @@ public class HelloActivity extends AppCompatActivity {
 
         tvSkip = findViewById(R.id.tvSkip);
         Intent intent = new Intent(HelloActivity.this, MainActivity.class);
-        CountDownTimer Timer = new CountDownTimer(4000, 1000) {
+        CountDownTimer Timer = new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvSkip.setText("Bỏ qua trong " + millisUntilFinished/1000);
             }

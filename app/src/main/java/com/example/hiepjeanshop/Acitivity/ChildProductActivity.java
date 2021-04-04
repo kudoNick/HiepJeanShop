@@ -19,6 +19,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hiepjeanshop.Adapter.ShoppingAdapter;
 import com.example.hiepjeanshop.Moder.Shopping;
 import com.example.hiepjeanshop.R;
+import com.example.hiepjeanshop.api.APIUrls;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -52,7 +53,8 @@ public class ChildProductActivity extends AppCompatActivity {
         rcvShopping.setHasFixedSize(true);
         rcvShopping.setLayoutManager(new GridLayoutManager(this, 2));
         shoppingList = new ArrayList<>();
-        AndroidNetworking.get("http://192.168.0.128:8080/api/products")
+        String url = APIUrls.URL_GET_PRODUCTS;
+        AndroidNetworking.get(url)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -85,6 +87,7 @@ public class ChildProductActivity extends AppCompatActivity {
         String price = intent.getStringExtra("price");
         String image = intent.getStringExtra("image");
         String amount = intent.getStringExtra("amount");
+        String id = intent.getStringExtra("id");
 
         Picasso.get().load(image).into(imgProduct);
 
@@ -106,7 +109,7 @@ public class ChildProductActivity extends AppCompatActivity {
         btnbuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BuyProductFragment buyProductFragment = new BuyProductFragment(name,image,price,amount,ChildProductActivity.this);
+                BuyProductFragment buyProductFragment = new BuyProductFragment(id,name,image,price,amount,ChildProductActivity.this);
                 buyProductFragment.show(getSupportFragmentManager(),"Mua san pham");
             }
         });
@@ -119,4 +122,9 @@ public class ChildProductActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

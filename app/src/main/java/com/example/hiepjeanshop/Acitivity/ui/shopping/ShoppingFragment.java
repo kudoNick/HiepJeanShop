@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -18,6 +19,8 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hiepjeanshop.Adapter.ShoppingAdapter;
 import com.example.hiepjeanshop.Moder.Shopping;
 import com.example.hiepjeanshop.R;
+import com.example.hiepjeanshop.api.APIUrls;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +31,14 @@ import java.util.List;
 
 public class ShoppingFragment extends Fragment {
 
+    private WormDotsIndicator worm_dots_indicator;
     private RecyclerView rcvShopping;
     private ShoppingAdapter shoppingAdapter;
     private List<Shopping> shoppingList;
     private Shopping shopping;
     private ProgressBar progressBar;
+    private ViewPager2 viewPager2;
+    private ViewpagerAdapter viewpagerAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -40,15 +46,18 @@ public class ShoppingFragment extends Fragment {
         rcvShopping = root.findViewById(R.id.rcvShopping);
 
         progressBar = root.findViewById(R.id.proBar);
-//        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-//        rcvShopping.setLayoutManager(layoutManager1);
 
+        //ngang
+//        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+//        rcvShoppingNgang.setLayoutManager(layoutManager1);
 
+        //dạng grid
         rcvShopping.setHasFixedSize(true);
         rcvShopping.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         shoppingList = new ArrayList<>();
-        AndroidNetworking.get("http://192.168.0.128:8080/api/products")
+        String url = APIUrls.URL_GET_PRODUCTS;
+        AndroidNetworking.get(url)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -73,6 +82,25 @@ public class ShoppingFragment extends Fragment {
                     }
                 });
 
+        //viewpager
+        ArrayList<Integer> imageList = new ArrayList<>();
+        imageList.add(R.drawable.banner);
+        imageList.add(R.drawable.banner2);
+        imageList.add(R.drawable.banner3);
+        imageList.add(R.drawable.banner4);
+        imageList.add(R.drawable.banner5);
+
+
+        viewPager2 = root.findViewById(R.id.pager);
+        viewpagerAdapter = new ViewpagerAdapter(getActivity(),imageList);
+        viewPager2.setAdapter(viewpagerAdapter);
+        viewPager2.setPageTransformer(new DepthPageTransformer());
+
+        worm_dots_indicator = (WormDotsIndicator) root.findViewById(R.id.worm_dots_indicator);
+        worm_dots_indicator.setViewPager2(viewPager2);
         return root;
+
+
     }
+
 }

@@ -12,14 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiepJeanShop">
         <activity
+            android:name=".Acitivity.Cart.CartActivity"
+            android:label="@string/title_activity_card"
+            android:theme="@style/Theme.HiepJeanShop.NoActionBar"></activity>
+        <activity
             android:name=".Acitivity.ChildProductActivity"
             android:label="@string/title_activity_child_product"
-            android:theme="@style/Theme.HiepJeanShop.NoActionBar"></activity>
+            android:theme="@style/Theme.HiepJeanShop.NoActionBar" />
         <activity android:name=".Acitivity.Accout.SignActivity" />
         <activity android:name=".Acitivity.Accout.LoginActivity" />
         <activity
             android:name=".Acitivity.MainActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            />
         <activity android:name=".HelloActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

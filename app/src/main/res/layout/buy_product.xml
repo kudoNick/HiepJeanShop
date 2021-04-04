@@ -55,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <RadioGroup
+            android:id="@+id/radioGr"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -87,7 +88,6 @@
         android:background="@android:color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:orientation="horizontal"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
@@ -104,12 +104,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:hint="1"
+            android:digits="123456789"
+            android:background="@android:color/transparent"
+            android:enabled="false"
             android:id="@+id/edtAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:hint="1"
-            android:inputType="numberSigned"
+            android:text="1"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.947"
             app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -120,6 +124,7 @@
         android:layout_height="0.5dp"
         android:background="@android:color/black" />
     <Button
+        android:enabled="false"
         android:id="@+id/btnBuy"
         android:text="Mua ngay"
         android:layout_marginHorizontal="16dp"

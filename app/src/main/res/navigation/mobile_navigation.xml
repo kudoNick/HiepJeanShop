@@ -8,18 +8,17 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.hiepjeanshop.Acitivity.ui.shopping.ShoppingFragment"
-        android:label="@string/title_home"
         tools:layout="@layout/fragment_shopping" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.hiepjeanshop.Acitivity.ui.cart.CartFragment"
-        android:label="@string/title_dashboard"
+        android:label="Hóa Đơn"
         tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.hiepjeanshop.Acitivity.ui.user.UserFragment"
-        android:label="@string/title_notifications"
+        android:label="Tài khoản"
         tools:layout="@layout/fragment_user" />
 </navigation>

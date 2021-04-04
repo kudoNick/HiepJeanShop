@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:background="@android:color/transparent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="410dp"
+    android:layout_width="350dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -49,34 +49,49 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="Size: XL"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tvAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số lượng: 1"
+                android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.588"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintStart_toEndOf="@+id/tvSize"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:gravity="right"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:textSize="20dp"
+            android:textColor="#ff0000"
+            android:id="@+id/tvTotalPrice"
+            android:layout_marginRight="50dp"
+            android:layout_gravity="center"
+            android:text="Tổng Tiền"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     <Button
+        android:layout_marginRight="5dp"
         android:id="@+id/btnBuy"
         android:text="Xác Nhận"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

@@ -9,6 +9,10 @@
     android:layout_height="match_parent"
     tools:context=".Acitivity.ui.shopping.ShoppingFragment">
 
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,9 +21,38 @@
             android:layout_gravity="center"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvShopping"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <androidx.viewpager2.widget.ViewPager2
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:layout_gravity="center|bottom"
+                android:id="@+id/worm_dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:dotsColor="@color/material_blueA200"
+                app:dotsStrokeColor="@color/material_blueA200"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="14dp"
+                app:dotsSpacing="4dp"
+                app:dotsStrokeWidth="2dp"
+                />
+            </FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="8dp"
+                android:id="@+id/rcvShopping"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
