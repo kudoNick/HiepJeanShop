@@ -35,6 +35,7 @@ public class ShoppingFragment extends Fragment {
     private RecyclerView rcvShopping;
     private ShoppingAdapter shoppingAdapter;
     private List<Shopping> shoppingList;
+    private List<Shopping> shoppings = new ArrayList<Shopping>();
     private Shopping shopping;
     private ProgressBar progressBar;
     private ViewPager2 viewPager2;
@@ -57,6 +58,7 @@ public class ShoppingFragment extends Fragment {
 
         shoppingList = new ArrayList<>();
         String url = APIUrls.URL_GET_PRODUCTS;
+
         AndroidNetworking.get(url)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -67,13 +69,14 @@ public class ShoppingFragment extends Fragment {
                             for (int i = 0; i < products.length(); i++) {
                                 shopping = new Shopping(products.getJSONObject(i));
                                 shoppingList.add(shopping);
-                                progressBar.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         shoppingAdapter = new ShoppingAdapter(shoppingList, getContext());
                         rcvShopping.setAdapter(shoppingAdapter);
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -81,6 +84,7 @@ public class ShoppingFragment extends Fragment {
                         Toast.makeText(getContext(), anError.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
 
         //viewpager
         ArrayList<Integer> imageList = new ArrayList<>();

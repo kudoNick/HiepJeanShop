@@ -1,5 +1,6 @@
-package com.example.hiepjeanshop.Acitivity;
+package com.example.hiepjeanshop.Acitivity.ui.shopping;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,6 +27,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hiepjeanshop.Acitivity.Cart.CartActivity;
+import com.example.hiepjeanshop.Helper.UserHelper;
+import com.example.hiepjeanshop.Moder.User;
 import com.example.hiepjeanshop.R;
 import com.example.hiepjeanshop.api.APIUrls;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -45,6 +48,9 @@ public class BuyProductFragment extends BottomSheetDialogFragment {
     private RadioButton radio_S,radio_M,radio_L,radio_XL;
     private RadioGroup radioGr;
     private int isChecked;
+    private User user;
+    private UserHelper userHelper;
+
     Context context;
     public BuyProductFragment(String id ,String name,String image, String price, String amount,Context context) {
         this.image = image;
@@ -69,7 +75,6 @@ public class BuyProductFragment extends BottomSheetDialogFragment {
         radio_L = view.findViewById(R.id.radio_L);
         radio_XL = view.findViewById(R.id.radio_XL);
         radioGr = view.findViewById(R.id.radioGr);
-
 
 
         Picasso.get().load(image).into(imgProduct);
@@ -127,30 +132,33 @@ public class BuyProductFragment extends BottomSheetDialogFragment {
             }
         });
         amountTo = edtAmount.getText().toString().trim();
+
+
+
+        userHelper = new UserHelper(context);
+        user = new User();
+        user = userHelper.getUser();
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.loading_buy);
+                dialog.show();
+
                 AndroidNetworking.post(APIUrls.URL_GET_ADDCARTS)
-                .addBodyParameter("userName","tuanichi06")
-                .addBodyParameter("password","061200")
+                .addBodyParameter("userName",user.getUserName())
+                .addBodyParameter("password",user.getPassword())
                 .addBodyParameter("id",id)
                 .setPriority(Priority.LOW)
                 .build().getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray jsonArray = response.getJSONArray("products");
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                Shopping shopping = new Shopping(jsonArray.getJSONObject(i));
-//                                CartActivity.shoppingList.add(shopping);
-//                            }
-//                        } catch (JSONException e) {
-//                            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
-//                        }
 
                         Intent intent = new Intent(getContext(), CartActivity.class);
-                        intent.putExtra("amout", amountTo);
+                        intent.putExtra("amout", amountTo );
                         startActivity(intent);
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -159,6 +167,7 @@ public class BuyProductFragment extends BottomSheetDialogFragment {
                     }
                 });
 
+                //mở dialog xác nhận mua hàng
 //                Dialog dialog = new Dialog(context);
 //                dialog.setContentView(R.layout.confirm_product);
 //                imgProduct = dialog.findViewById(R.id.imgProduct);

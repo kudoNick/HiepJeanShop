@@ -1,10 +1,11 @@
-package com.example.hiepjeanshop.Acitivity;
+package com.example.hiepjeanshop.Acitivity.ui.shopping;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,10 +39,12 @@ public class ChildProductActivity extends AppCompatActivity {
     private List<Shopping> shoppingList;
     private Shopping shopping;
 
+    private ProgressBar proBar;
+
     Toolbar toolbar;
     private ImageView imgProduct;
     private TextView tvPrice,tvName;
-    private Button btnbuy;
+    private Button btnBuy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +71,10 @@ public class ChildProductActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         shoppingAdapter = new ShoppingAdapter(shoppingList, ChildProductActivity.this);
                         rcvShopping.setAdapter(shoppingAdapter);
-
+                        proBar.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -106,7 +110,7 @@ public class ChildProductActivity extends AppCompatActivity {
         }
 
         //button buy
-        btnbuy.setOnClickListener(new View.OnClickListener() {
+        btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BuyProductFragment buyProductFragment = new BuyProductFragment(id,name,image,price,amount,ChildProductActivity.this);
@@ -118,7 +122,8 @@ public class ChildProductActivity extends AppCompatActivity {
         imgProduct = findViewById(R.id.imgProduct);
         tvPrice = findViewById(R.id.tvPrice);
         tvName = findViewById(R.id.tvName);
-        btnbuy = findViewById(R.id.btnBuy);
+        btnBuy = findViewById(R.id.btnBuy);
+        proBar = findViewById(R.id.proBar);
 
     }
 

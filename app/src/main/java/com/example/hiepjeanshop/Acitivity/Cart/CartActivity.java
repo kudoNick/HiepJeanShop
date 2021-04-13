@@ -1,5 +1,6 @@
 package com.example.hiepjeanshop.Acitivity.Cart;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -13,7 +14,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hiepjeanshop.Helper.UserHelper;
 import com.example.hiepjeanshop.Moder.Shopping;
+import com.example.hiepjeanshop.Moder.User;
 import com.example.hiepjeanshop.R;
 import com.example.hiepjeanshop.api.APIUrls;
 
@@ -31,6 +34,9 @@ public class CartActivity extends AppCompatActivity {
     CartAdapter cardAdapter;
     Shopping shopping;
     List<Shopping> shoppingList = new ArrayList<>();
+
+    private User user;
+    private UserHelper userHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +51,16 @@ public class CartActivity extends AppCompatActivity {
         }
         Intent intent = getIntent();
         amout = intent.getStringExtra("amout");
+
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.loading);
+        dialog.show();
+        userHelper = new UserHelper(this);
+        user = new User();
+        user = userHelper.getUser();
         AndroidNetworking.post(APIUrls.URL_GET_MYCARTS)
-                .addBodyParameter("userName","tuanichi06")
-                .addBodyParameter("password","061200")
+                .addBodyParameter("userName",user.getUserName())
+                .addBodyParameter("password",user.getPassword())
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -65,11 +78,11 @@ public class CartActivity extends AppCompatActivity {
                 cardAdapter = new CartAdapter(shoppingList,CartActivity.this,amout);
                 rcvCard.setLayoutManager(new LinearLayoutManager(CartActivity.this));
                 rcvCard.setAdapter(cardAdapter);
-                Toast.makeText(CartActivity.this, "thanh cong", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
             @Override
             public void onError(ANError anError) {
-                Toast.makeText(CartActivity.this, String.valueOf(anError), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartActivity.this, anError.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

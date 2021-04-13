@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="Giỏ hàng" />
+        android:icon="@drawable/bill"
+        android:title="Đơn hàng" />
 
     <item
         android:id="@+id/navigation_notifications"

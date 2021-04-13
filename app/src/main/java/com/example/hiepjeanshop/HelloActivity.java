@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.hiepjeanshop.Acitivity.MainActivity;
+import com.example.hiepjeanshop.Acitivity.Accout.LoginActivity;
 
 public class HelloActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class HelloActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hello);
 
         tvSkip = findViewById(R.id.tvSkip);
-        Intent intent = new Intent(HelloActivity.this, MainActivity.class);
+        Intent intent = new Intent(HelloActivity.this, LoginActivity.class);
         CountDownTimer Timer = new CountDownTimer(1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvSkip.setText("Bỏ qua trong " + millisUntilFinished/1000);

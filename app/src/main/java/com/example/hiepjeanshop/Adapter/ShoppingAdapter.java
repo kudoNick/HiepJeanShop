@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hiepjeanshop.Acitivity.ChildProductActivity;
+import com.example.hiepjeanshop.Acitivity.ui.shopping.ChildProductActivity;
 import com.example.hiepjeanshop.Moder.Shopping;
 import com.example.hiepjeanshop.R;
 import com.squareup.picasso.Picasso;

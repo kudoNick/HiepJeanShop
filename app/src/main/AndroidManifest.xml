@@ -16,7 +16,7 @@
             android:label="@string/title_activity_card"
             android:theme="@style/Theme.HiepJeanShop.NoActionBar"></activity>
         <activity
-            android:name=".Acitivity.ChildProductActivity"
+            android:name=".Acitivity.ui.shopping.ChildProductActivity"
             android:label="@string/title_activity_child_product"
             android:theme="@style/Theme.HiepJeanShop.NoActionBar" />
         <activity android:name=".Acitivity.Accout.SignActivity" />
